@@ -1,0 +1,25 @@
+{ 
+    "manifest_version": 3,
+    "name": "FlashSummary: YouTube AI Assistant",
+    "description": "An extension to summarize youtube videos using the transcript",
+    "version": "1.0",
+    "permissions": ["activeTab", "storage"],
+
+    "action": {
+        "default_title": "Summarize YouTube Videos",
+        "default_icon": {
+            "16": "images/youtube-icon.png",
+            "32": "images/youtube-icon.png",
+            "48": "images/youtube-icon.png",
+            "128": "images/youtube-icon.png"
+        },
+        "default_popup": "popup.html"
+    },
+
+    "icons": {
+        "16": "images/youtube-icon.png",
+        "32": "images/youtube-icon.png",
+        "48": "images/youtube-icon.png",
+        "128": "images/youtube-icon.png"
+    }
+}
