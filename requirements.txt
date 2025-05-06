@@ -4,4 +4,3 @@ python-dotenv
 markdown
 Flask
 flask-cors
-gunicorn
