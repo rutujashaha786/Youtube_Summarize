@@ -37,7 +37,7 @@ btn.addEventListener("click", function() {
         let url = tabs[0].url;
         console.log("Active Tab URL:", tabs[0].url);
 
-        let apiEndpoint = `http://127.0.0.1:5000/summary?url=${encodeURIComponent(url)}`;
+        let apiEndpoint = `https://youtube-summarize-dz8x.onrender.com/summary?url=${encodeURIComponent(url)}`;
 
         try{
             let response = await fetch(apiEndpoint);
