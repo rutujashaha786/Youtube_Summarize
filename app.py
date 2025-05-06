@@ -61,7 +61,7 @@ def extract_transcript_details(video_id):
             
             try:
                 transcript_text_arr = ytt_api.fetch(video_id, languages=[language_code])
-                transcript = " ".join([i["text"] for i in transcript_text_arr])
+                transcript = " ".join([i.text for i in transcript_text_arr])
                 return transcript, None
             except (NoTranscriptFound, CouldNotRetrieveTranscript, Exception) as e:
                 print(f"Error retrieving transcript for language {language_code}: {str(e)}")
