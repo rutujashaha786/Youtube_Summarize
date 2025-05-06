@@ -8,10 +8,19 @@ from urllib.parse import urlparse, parse_qs
 
 import google.generativeai as genai 
 from youtube_transcript_api import YouTubeTranscriptApi, CouldNotRetrieveTranscript, TranscriptsDisabled, NoTranscriptFound
+from youtube_transcript_api.proxies import WebshareProxyConfig
 
 load_dotenv()
 app = Flask(__name__)
 CORS(app)
+
+# Webshare proxy setup
+proxy_config = WebshareProxyConfig(
+    proxy_username=os.getenv("WEBSHARE_USERNAME"),
+    proxy_password=os.getenv("WEBSHARE_PASSWORD")
+)
+
+ytt_api = YouTubeTranscriptApi(proxy_config=proxy_config)
 
 genai.configure(api_key = os.getenv("GOOGLE_API_KEY"))
 
@@ -38,7 +47,7 @@ def extract_transcript_details(video_id):
             return None, "Invalid YouTube URL format."
 
         try:
-            available_transcripts = YouTubeTranscriptApi.list_transcripts(video_id)
+            available_transcripts = ytt_api.list_transcripts(video_id)
             print(f"Available transcripts: {available_transcripts}")
         except TranscriptsDisabled:
             return None, "Transcripts are disabled for this video."
@@ -51,7 +60,7 @@ def extract_transcript_details(video_id):
             language_code = "en" if not auto_generated and not language_code.startswith("en") else language_code
             
             try:
-                transcript_text_arr = YouTubeTranscriptApi.get_transcript(video_id, languages=[language_code])
+                transcript_text_arr = ytt_api.get_transcript(video_id, languages=[language_code])
                 transcript = " ".join([i["text"] for i in transcript_text_arr])
                 return transcript, None
             except (NoTranscriptFound, CouldNotRetrieveTranscript, Exception) as e:
