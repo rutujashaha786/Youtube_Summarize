@@ -20,8 +20,6 @@ proxy_config = WebshareProxyConfig(
     proxy_password=os.getenv("WEBSHARE_PASSWORD")
 )
 
-ytt_api = YouTubeTranscriptApi(proxy_config=proxy_config)
-
 genai.configure(api_key = os.getenv("GOOGLE_API_KEY"))
 
 prompt="""You are Yotube video summarizer. You will be taking the transcript text
@@ -47,7 +45,7 @@ def extract_transcript_details(video_id):
             return None, "Invalid YouTube URL format."
 
         try:
-            available_transcripts = ytt_api.list_transcripts(video_id)
+            available_transcripts = YouTubeTranscriptApi.list_transcripts(video_id, proxy_config=proxy_config)
             print(f"Available transcripts: {available_transcripts}")
         except TranscriptsDisabled:
             return None, "Transcripts are disabled for this video."
@@ -60,7 +58,7 @@ def extract_transcript_details(video_id):
             language_code = "en" if not auto_generated and not language_code.startswith("en") else language_code
             
             try:
-                transcript_text_arr = ytt_api.get_transcript(video_id, languages=[language_code])
+                transcript_text_arr = YouTubeTranscriptApi.get_transcript(video_id, languages=[language_code], proxy_config=proxy_config)
                 transcript = " ".join([i["text"] for i in transcript_text_arr])
                 return transcript, None
             except (NoTranscriptFound, CouldNotRetrieveTranscript, Exception) as e:
