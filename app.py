@@ -21,7 +21,7 @@ within 250 words. Ensure the summary is in the same language as the transcript. 
 
 def generate_gemini_content(prompt, transcript_text):
     try:
-        model = genai.GenerativeModel("gemini-pro")
+        model = genai.GenerativeModel("gemini-2.0-flash")
         response = model.generate_content(prompt+transcript_text)
         return response.text  
     except Exception as e:
