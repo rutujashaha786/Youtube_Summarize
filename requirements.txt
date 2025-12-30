@@ -1,4 +1,4 @@
-youtube-transcript-api==0.6.3
+youtube-transcript-api==1.0.3
 google-generativeai
 python-dotenv
 markdown
