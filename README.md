@@ -2,6 +2,9 @@
 
 FlashSummary is a GenAI-powered Chrome Extension that generates concise AI summaries of YouTube videos using transcript data and Google Gemini Flash (via Python Flask backend).
 
+## 🔗 Demo
+[🎥 Walkthrough](https://drive.google.com/file/d/17148CJJgnt070MyuLO1qZFDHFW63tbpD/view?usp=sharing )
+
 ## 📌 Features
 - **🔍 One-Click Summarization:** Summarizes any YouTube video you are currently watching.
 - **🧠 GenAI-Powered:** Uses Google Gemini Flash for fast and contextual video summaries.
